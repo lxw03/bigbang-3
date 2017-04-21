@@ -1,10 +1,11 @@
 task generateJavadocs(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    options.linkSource true
-    classpath = configurations.compile
-    classpath += project.files(android.getBootClasspath()
-            .join(File.pathSeparator))
-    failOnError false
+    source subprojects.collect {project -> project.sourceSets.main.allJava }
+    classpath += configurations.compile
+    classpath += files(project.android.getBootClasspath().join(File.pathSeparator))
+    options {
+        links "http://developer.android.com/reference/reference/"
+        linkSource true
+    }
 }
 
 task generateSourcesJar(type: Jar) {

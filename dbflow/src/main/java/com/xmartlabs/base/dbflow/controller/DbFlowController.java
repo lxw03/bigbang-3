@@ -14,7 +14,7 @@ import com.raizlabs.android.dbflow.sql.language.property.Property;
 import com.raizlabs.android.dbflow.structure.BaseModel;
 import com.xmartlabs.base.core.controller.Controller;
 import com.xmartlabs.base.core.controller.EntityDao;
-import com.xmartlabs.base.dbflow.model.DatabaseModel;
+import com.xmartlabs.base.core.model.EntityWithId;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 
 /** {@link EntityDao} implementation using DbFlow ORM */
 @RequiredArgsConstructor
-public abstract class DbFlowController<Id, D extends DatabaseModel<Id>> extends Controller
+public abstract class DbFlowController<Id, D extends BaseModel & EntityWithId<Id>> extends Controller
     implements EntityDao<Id, D, SQLCondition> {
   @Getter(AccessLevel.PRIVATE)
   private final Class<D> modelClass;
